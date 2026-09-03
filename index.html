@@ -3,9 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="kei — Unityでスマホアプリを個人開発。化学系企業の研究職のかたわら、Unityでアプリ・ゲームを開発しています。">
+<meta name="description" content="kei — Unityでスマホアプリを個人開発しています。ちょっとしたスキマ時間を彩るゲームや、生活にフィットするアプリを作っています。">
+<meta property="og:title" content="kei.dev — 個人アプリ開発">
+<meta property="og:description" content="ちょっとしたスキマ時間を彩るゲームや、生活にフィットするアプリを作っています。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kei6068.github.io/">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 font-size=%2280%22><text y=%2280%22>%F0%9F%A7%AA</text></svg>">
-<title>kei — Unity個人開発ログ</title>
+<title>kei.dev — 個人アプリ開発</title>
 <style>
   @font-face {
     font-family: "Plex Mono Lab";
@@ -30,590 +35,284 @@
   }
 
   :root {
-    --paper: #eff3ee;
-    --paper-raised: #f8faf7;
-    --paper-line: rgba(27, 36, 48, 0.15);
-    --paper-line-strong: rgba(27, 36, 48, 0.28);
-    --ink: #1b2430;
-    --ink-soft: #52606d;
-    --ink-faint: #7c8792;
-    --accent: #0f7d74;
-    --accent-ink: #0a5a53;
-    --accent-tint: rgba(15, 125, 116, 0.1);
-    --status-live-bg: rgba(47, 158, 68, 0.14);
-    --status-live-ink: #2c7a3c;
-    --status-wip-bg: rgba(216, 130, 15, 0.14);
-    --status-wip-ink: #a8600d;
-    --shadow: 0 1px 0 rgba(27, 36, 48, 0.06);
-    color-scheme: light;
+    --bg: #f6f3ec;
+    --card: #fffdf8;
+    --panel: #efe9dc;
+    --ink: #1b1a16;
+    --body: #47433a;
+    --faint: #8a8375;
+    --hair: rgba(27,26,22,0.12);
+    --accent: #cf4526;
+    --accent-hover: #a4351b;
+    --ok: #2f7d4f;
+    --wip: #b07d1a;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #14181a;
-      --paper-raised: #1b2124;
-      --paper-line: rgba(233, 237, 233, 0.14);
-      --paper-line-strong: rgba(233, 237, 233, 0.26);
-      --ink: #e9ede9;
-      --ink-soft: #a7b0aa;
-      --ink-faint: #79837d;
-      --accent: #4fd6c4;
-      --accent-ink: #8be8db;
-      --accent-tint: rgba(79, 214, 196, 0.12);
-      --status-live-bg: rgba(79, 191, 103, 0.16);
-      --status-live-ink: #7fd699;
-      --status-wip-bg: rgba(240, 166, 60, 0.16);
-      --status-wip-ink: #f0b968;
-      --shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
-      color-scheme: dark;
-    }
-  }
+  * { box-sizing: border-box; }
 
-  :root[data-theme="dark"] {
-    --paper: #14181a;
-    --paper-raised: #1b2124;
-    --paper-line: rgba(233, 237, 233, 0.14);
-    --paper-line-strong: rgba(233, 237, 233, 0.26);
-    --ink: #e9ede9;
-    --ink-soft: #a7b0aa;
-    --ink-faint: #79837d;
-    --accent: #4fd6c4;
-    --accent-ink: #8be8db;
-    --accent-tint: rgba(79, 214, 196, 0.12);
-    --status-live-bg: rgba(79, 191, 103, 0.16);
-    --status-live-ink: #7fd699;
-    --status-wip-bg: rgba(240, 166, 60, 0.16);
-    --status-wip-ink: #f0b968;
-    --shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
-    color-scheme: dark;
-  }
+  html { -webkit-text-size-adjust: 100%; }
 
-  :root[data-theme="light"] {
-    --paper: #eff3ee;
-    --paper-raised: #f8faf7;
-    --paper-line: rgba(27, 36, 48, 0.15);
-    --paper-line-strong: rgba(27, 36, 48, 0.28);
-    --ink: #1b2430;
-    --ink-soft: #52606d;
-    --ink-faint: #7c8792;
-    --accent: #0f7d74;
-    --accent-ink: #0a5a53;
-    --accent-tint: rgba(15, 125, 116, 0.1);
-    --status-live-bg: rgba(47, 158, 68, 0.14);
-    --status-live-ink: #2c7a3c;
-    --status-wip-bg: rgba(216, 130, 15, 0.14);
-    --status-wip-ink: #a8600d;
-    --shadow: 0 1px 0 rgba(27, 36, 48, 0.06);
-    color-scheme: light;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  html,
   body {
     margin: 0;
-    padding: 0;
-  }
-
-  body {
-    background: var(--paper);
+    background: var(--bg);
     color: var(--ink);
     font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium",
-      "Yu Gothic", "Noto Sans JP", sans-serif;
-    font-size: 16px;
-    line-height: 1.85;
+      "Noto Sans JP", system-ui, sans-serif;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    background-image: linear-gradient(var(--paper-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
-    background-size: 34px 34px;
-    background-position: -1px -1px;
   }
 
-  .jp-serif {
-    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP",
-      serif;
-  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-hover); }
 
   .mono {
     font-family: "Plex Mono Lab", "SF Mono", "IBM Plex Mono", ui-monospace, monospace;
-    font-variant-numeric: tabular-nums;
   }
+  .serif {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+  }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 80px); }
+
+  /* nav */
+  .site-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(20px, 5vw, 80px);
+    max-width: 1120px; margin: 0 auto;
+    border-bottom: 1px solid var(--hair);
+  }
+  .site-nav .brand { font-weight: 800; font-size: 16px; letter-spacing: 0.02em; }
+  .site-nav .brand span { color: var(--accent); }
+  .site-nav .handle { font-size: 12px; letter-spacing: 0.14em; color: var(--faint); }
 
   .eyebrow {
-    font-family: "Plex Mono Lab", "SF Mono", ui-monospace, monospace;
-    font-weight: 500;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent-ink);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6em;
+    margin: 0 0 24px;
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent);
   }
 
-  .eyebrow::before {
-    content: "";
-    width: 1.4em;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.6;
-  }
-
-  a {
-    color: var(--accent-ink);
-  }
-
-  .wrap {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 28px;
-  }
-
-  /* ---------- Hero ---------- */
-
+  /* hero */
   .hero {
-    padding: 92px 0 64px;
-    border-bottom: 1px solid var(--paper-line-strong);
-  }
-
-  .hero .eyebrow {
-    margin-bottom: 22px;
-  }
-
-  .hero h1 {
-    font-size: clamp(2.1rem, 5vw, 3.1rem);
-    line-height: 1.35;
-    margin: 0 0 22px;
-    font-weight: 600;
-    text-wrap: balance;
-    letter-spacing: 0.01em;
-  }
-
-  .hero p.lede {
-    max-width: 46em;
-    color: var(--ink-soft);
-    font-size: 1.02rem;
-    margin: 0 0 34px;
-  }
-
-  .meta-strip {
+    padding: clamp(56px, 9vw, 92px) 0 clamp(48px, 7vw, 76px);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    border-top: 1px solid var(--paper-line);
-    border-bottom: 1px solid var(--paper-line);
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: clamp(32px, 6vw, 60px);
+    align-items: start;
+  }
+  .hero h1 {
+    margin: 0 0 24px;
+    font-size: clamp(26px, 4.6vw, 37px);
+    line-height: 1.6;
+    font-weight: 800;
+    letter-spacing: 0.005em;
+    max-width: 20em;
+    text-wrap: pretty;
+  }
+  .hero .lede { margin: 0; font-size: 16px; line-height: 2; color: var(--body); max-width: 34em; }
+
+  .status {
+    border: 1px solid var(--hair);
+    border-radius: 10px;
+    padding: 24px;
+    background: var(--card);
+  }
+  .status .label { font-size: 11px; letter-spacing: 0.12em; color: var(--faint); margin-bottom: 16px; }
+  .status dl { margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .status .row .k { font-size: 10px; letter-spacing: 0.1em; color: var(--faint); }
+  .status .row .v { font-size: 13px; margin-top: 4px; }
+
+  /* how i build */
+  .how {
+    margin: 0 0 clamp(64px, 9vw, 84px);
+    padding: clamp(32px, 5vw, 44px) clamp(24px, 4vw, 48px);
+    background: var(--panel);
+    border-radius: 12px;
+  }
+  .how h2 { margin: 0 0 18px; font-size: clamp(22px, 3vw, 28px); font-weight: 700; line-height: 1.5; }
+  .how p { margin: 0; font-size: 15px; line-height: 2.05; color: #3b382f; max-width: 62ch; }
+  .how .tools {
+    margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--hair);
+    font-size: 11px; letter-spacing: 0.1em; color: var(--faint);
   }
 
-  .meta-strip dl {
-    margin: 0;
-    padding: 14px 18px 14px 0;
-    border-left: 1px solid var(--paper-line);
-    padding-left: 18px;
+  /* products */
+  .products { padding-bottom: clamp(36px, 5vw, 52px); }
+  .products .head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 40px;
   }
+  .products .head h2 { margin: 0; font-size: clamp(24px, 3.4vw, 30px); font-weight: 800; }
+  .products .head .count { font-size: 12px; color: var(--faint); letter-spacing: 0.12em; }
 
-  .meta-strip dl:first-child {
-    border-left: none;
-    padding-left: 0;
+  .product {
+    padding: 36px 0;
+    border-top: 1px solid var(--hair);
   }
-
-  .meta-strip dt {
-    font-family: "Plex Mono Lab", ui-monospace, monospace;
-    font-size: 0.66rem;
-    letter-spacing: 0.12em;
-    color: var(--ink-faint);
-    text-transform: uppercase;
-    margin-bottom: 6px;
+  .product:last-child { border-bottom: 1px solid var(--hair); }
+  .product .meta { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
+  .product .exp { font-size: 12px; color: var(--faint); }
+  .product .stamp {
+    font-size: 10px; letter-spacing: 0.1em; border-radius: 3px; padding: 3px 8px;
   }
-
-  .meta-strip dd {
-    margin: 0;
-    font-size: 0.94rem;
-    color: var(--ink);
+  .product .stamp.live { color: var(--ok); border: 1px solid var(--ok); }
+  .product .stamp.wip { color: var(--wip); border: 1px solid var(--wip); }
+  .product h3 { margin: 0 0 10px; font-size: clamp(22px, 3.2vw, 28px); font-weight: 800; }
+  .product h3 .qual { font-size: 0.6em; color: var(--faint); font-weight: 400; }
+  .product .catch { margin: 0 0 14px; font-size: 15px; color: var(--accent); }
+  .product .desc { margin: 0 0 22px; font-size: 14px; line-height: 1.95; color: var(--body); max-width: 60ch; }
+  .product .cta-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .product .btn {
+    display: inline-block; background: var(--accent); color: #fff;
+    font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 6px;
   }
-
-  /* ---------- Section shell ---------- */
-
-  section.block {
-    padding: 64px 0;
-    border-bottom: 1px solid var(--paper-line-strong);
+  .product .btn:hover { background: var(--accent-hover); color: #fff; }
+  .product .btn.ghost {
+    background: transparent; color: #7c7566; border: 1px solid rgba(27,26,22,0.25);
   }
+  .product .tags { font-size: 11px; color: var(--faint); }
 
-  section.block h2 {
-    font-size: clamp(1.5rem, 3vw, 1.9rem);
-    margin: 16px 0 22px;
-    font-weight: 600;
-    text-wrap: balance;
+  /* footer */
+  .contact { padding: 8px 0 64px; }
+  .contact .box {
+    background: var(--panel); border-radius: 12px;
+    padding: clamp(28px, 4vw, 36px) clamp(24px, 4vw, 40px);
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px;
   }
+  .contact .box .label { font-size: 11px; letter-spacing: 0.12em; color: var(--faint); margin-bottom: 10px; }
+  .contact .box p { margin: 0 0 8px; font-size: 14px; color: var(--body); }
+  .contact .box a { font-weight: 700; font-size: 15px; }
+  .contact .copy { margin: 32px 0 0; font-size: 11px; letter-spacing: 0.14em; color: #a49d8c; }
 
-  /* ---------- Concept ---------- */
-
-  .concept-body {
-    max-width: 42em;
-    color: var(--ink-soft);
-    font-size: 1rem;
-  }
-
-  .concept-body strong {
-    color: var(--ink);
-    font-weight: 600;
-  }
-
-  /* ---------- Product cards ---------- */
-
-  .exp-list {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-  }
-
-  .exp-card {
-    position: relative;
-    background: var(--paper-raised);
-    border: 1px solid var(--paper-line-strong);
-    padding: 30px 30px 26px;
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .exp-card.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .exp-card--ticket {
-    border-right-style: dashed;
-    border-right-width: 2px;
-  }
-
-  .exp-card--ticket::before {
-    content: "";
-    position: absolute;
-    right: -8px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: var(--paper);
-    border: 1px solid var(--paper-line-strong);
-    box-shadow: 0 -84px 0 -1px var(--paper), 0 -84px 0 0 var(--paper-line-strong),
-      0 84px 0 -1px var(--paper), 0 84px 0 0 var(--paper-line-strong);
-  }
-
-  .exp-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 14px;
-  }
-
-  .exp-number {
-    font-family: "Plex Mono Lab", ui-monospace, monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    color: var(--ink-faint);
-  }
-
-  .stamp {
-    font-family: "Plex Mono Lab", ui-monospace, monospace;
-    font-size: 0.66rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    padding: 5px 10px;
-    border-radius: 3px;
-    transform: rotate(-2.5deg);
-    white-space: nowrap;
-  }
-
-  .stamp--live {
-    background: var(--status-live-bg);
-    color: var(--status-live-ink);
-    border: 1px solid var(--status-live-ink);
-  }
-
-  .stamp--wip {
-    background: var(--status-wip-bg);
-    color: var(--status-wip-ink);
-    border: 1px solid var(--status-wip-ink);
-  }
-
-  .exp-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin: 0 0 6px;
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .exp-catch {
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-    margin: 0 0 16px;
-  }
-
-  .exp-desc {
-    color: var(--ink-soft);
-    font-size: 0.96rem;
-    max-width: 42em;
-    margin: 0 0 20px;
-  }
-
-  .stroop-chips {
-    display: inline-flex;
-    gap: 6px;
-    font-family: "Plex Mono Lab", ui-monospace, monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.02em;
-  }
-
-  .stroop-chips span {
-    padding: 2px 7px;
-    border-radius: 2px;
-    border: 1px solid currentColor;
-    font-weight: 500;
-  }
-
-  .exp-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--paper-line);
-    padding-top: 16px;
-  }
-
-  .exp-tags {
-    display: flex;
-    gap: 14px;
-    font-family: "Plex Mono Lab", ui-monospace, monospace;
-    font-size: 0.7rem;
-    color: var(--ink-faint);
-    letter-spacing: 0.02em;
-  }
-
-  .exp-cta {
-    font-family: "Plex Mono Lab", ui-monospace, monospace;
-    font-size: 0.78rem;
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--accent-ink);
-    border-bottom: 1px solid var(--accent);
-    padding-bottom: 2px;
-    transition: opacity 0.15s ease;
-  }
-
-  .exp-cta:hover {
-    opacity: 0.7;
-  }
-
-  .exp-cta--disabled {
-    color: var(--ink-faint);
-    border-bottom-color: var(--paper-line-strong);
-    cursor: default;
-  }
-
-  .exp-cta--disabled:hover {
-    opacity: 1;
-  }
-
-  /* ---------- Footer ---------- */
-
-  footer.block {
-    padding: 48px 0 80px;
-    border-bottom: none;
-  }
-
-  footer .foot-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    font-size: 0.86rem;
-    color: var(--ink-faint);
-  }
-
-  footer a.x-link {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--paper-line-strong);
-  }
-
-  footer a.x-link:hover {
-    border-bottom-color: var(--accent);
-    color: var(--accent-ink);
-  }
-
-  footer .foot-copy {
-    font-family: "Plex Mono Lab", ui-monospace, monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.02em;
-  }
-
+  /* reveal */
+  [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  [data-reveal].is-visible { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
-    .exp-card {
-      transition: none;
-      opacity: 1;
-      transform: none;
-    }
+    [data-reveal] { opacity: 1; transform: none; transition: none; }
   }
 
-  @media (max-width: 560px) {
-    .hero {
-      padding: 64px 0 44px;
-    }
-    section.block {
-      padding: 44px 0;
-    }
-    .exp-card--ticket {
-      border-right-style: solid;
-    }
-    .exp-card--ticket::before {
-      display: none;
-    }
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; }
+    .status { order: 2; }
+    .contact .box { grid-template-columns: 1fr; }
+    .products .head { flex-direction: column; align-items: flex-start; gap: 6px; }
   }
 </style>
-
 </head>
 <body>
+
+<header class="site-nav">
+  <span class="brand">kei<span>.</span>dev</span>
+  <a class="mono handle" href="https://x.com/kei6068" target="_blank" rel="noopener">@kei6068</a>
+</header>
+
 <main class="wrap">
+
   <section class="hero">
-    <p class="eyebrow">Individual Development Log</p>
-    <h1 class="jp-serif">平日は試薬、休日はUnity。</h1>
-    <p class="lede">
-      Unityでスマホアプリを個人開発しています。本業は化学系企業の研究職。
-      仮説を立てて、小さく試して、記録して、また直す ──
-      研究のやり方をそのままアプリづくりにも持ち込んでいます。
+    <div>
+      <p class="mono eyebrow">Unity · iOS · 個人開発</p>
+      <h1>ちょっとしたスキマ時間を彩るゲームや、生活にフィットするアプリを作っています。</h1>
+      <p class="lede">
+        Unityでスマホアプリを個人開発しています。小さく作って試し、記録して、また直す ──
+        そのペースで一つずつ形にしています。
+      </p>
+    </div>
+    <aside class="status">
+      <div class="mono label">STATUS</div>
+      <dl>
+        <div class="row"><div class="mono k">RELEASED</div><div class="v">1タイトル(iOS)</div></div>
+        <div class="row"><div class="mono k">IN DEV</div><div class="v">1タイトル</div></div>
+        <div class="row"><div class="mono k">GOAL</div><div class="v">まずは 1,000 Downloads</div></div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="how" data-reveal>
+    <p class="mono eyebrow">How I build</p>
+    <h2 class="serif">研究のやり方で、アプリを作る。</h2>
+    <p>
+      本業は化学系企業の研究職です。仮説を立て、小さく実験し、結果を記録して、また条件を変える ──
+      研究室でやっていることを、そのままアプリづくりに持ち込んでいます。派手な当たりを狙うより、
+      手を動かして検証を重ねるほうが性に合っているみたいです。
     </p>
-    <div class="meta-strip">
-      <dl>
-        <dt>Role</dt>
-        <dd>研究職(化学系企業)</dd>
-      </dl>
-      <dl>
-        <dt>Tools</dt>
-        <dd>Unity / AIエージェント</dd>
-      </dl>
-      <dl>
-        <dt>Goal</dt>
-        <dd>まずは 1,000 Downloads</dd>
-      </dl>
-    </div>
+    <div class="mono tools">TOOLS: Unity · AIエージェント</div>
   </section>
 
-  <section class="block">
-    <p class="eyebrow">Concept</p>
-    <h2 class="jp-serif">コツコツ、検証する。</h2>
-    <p class="concept-body">
-      研究も開発も、いきなり正解には辿り着きません。<strong>小さく作って、試して、記録して、また直す</strong>
-      ──その繰り返しです。年齢を問わず楽しめるゲームや、暮らしに少しフィットするアプリを、
-      そのくらいのペースで一つずつ形にしていくのが今のスタンスです。
-    </p>
+  <section class="products">
+    <div class="head">
+      <h2>プロダクト</h2>
+      <span class="mono count">2 PROJECTS</span>
+    </div>
+
+    <article class="product" data-reveal>
+      <div class="meta">
+        <span class="mono exp">EXP.01</span>
+        <span class="mono stamp live">リリース済み</span>
+      </div>
+      <h3>いろもじチグハグ</h3>
+      <p class="catch">「あなたの脳は、惑わされずにいられるか？」</p>
+      <p class="desc">
+        色の名前と背景色が一致しているカード1枚を30秒以内に見つけるゲーム。
+        文字の意味と色の情報がぶつかると脳が混乱する「ストループ効果」を利用した脳トレアプリです。
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="https://apps.apple.com/jp/app/%E3%81%84%E3%82%8D%E3%82%82%E3%81%98%E3%83%81%E3%82%B0%E3%83%8F%E3%82%B0/id6789898986" target="_blank" rel="noopener">App Storeで見る →</a>
+        <span class="mono tags">iOS · 脳トレ</span>
+      </div>
+    </article>
+
+    <article class="product" data-reveal>
+      <div class="meta">
+        <span class="mono exp">EXP.02</span>
+        <span class="mono stamp wip">開発中</span>
+      </div>
+      <h3>コツコツ宝くじ<span class="qual">(仮)</span></h3>
+      <p class="catch">タップと放置で、コツコツ一攫千金。</p>
+      <p class="desc">
+        タップと放置でお金を貯めて、そのお金でドリームジャンボ宝くじを購入。
+        当選確率はリアルの宝くじに準拠し、当たるほど強化が進む放置系クリッカー×宝くじシミュレーターです。
+      </p>
+      <div class="cta-row">
+        <span class="btn ghost">近日公開予定</span>
+        <span class="mono tags">iOS(予定) · 放置×宝くじ</span>
+      </div>
+    </article>
   </section>
 
-  <section class="block">
-    <p class="eyebrow">Experiment Log</p>
-    <h2 class="jp-serif">プロダクト</h2>
-
-    <div class="exp-list">
-      <article class="exp-card" data-reveal>
-        <div class="exp-head">
-          <span class="exp-number mono">EXP. 01</span>
-          <span class="stamp stamp--live">リリース済み</span>
-        </div>
-        <h3 class="exp-title">
-          いろもじチグハグ
-          <span class="stroop-chips" aria-hidden="true">
-            <span style="color:#c0392b;">あお</span>
-            <span style="color:#1f6fd6;">あか</span>
-            <span style="color:#0f7d74;">きいろ</span>
-          </span>
-        </h3>
-        <p class="exp-catch">「あなたの脳は、惑わされずにいられるか？」</p>
-        <p class="exp-desc">
-          色の名前と背景色が一致しているカード1枚を30秒以内に見つけるゲーム。
-          文字の意味と色の情報がぶつかると脳が混乱する「ストループ効果」を利用した脳トレアプリです。
-        </p>
-        <div class="exp-footer">
-          <div class="exp-tags">
-            <span>PLATFORM: iOS</span>
-            <span>GENRE: 脳トレ</span>
-          </div>
-          <a
-            class="exp-cta"
-            href="https://apps.apple.com/jp/app/%E3%81%84%E3%82%8D%E3%82%82%E3%81%98%E3%83%81%E3%82%B0%E3%83%8F%E3%82%B0/id6789898986"
-            target="_blank"
-            rel="noopener"
-            >App Storeで見る →</a
-          >
-        </div>
-      </article>
-
-      <article class="exp-card exp-card--ticket" data-reveal>
-        <div class="exp-head">
-          <span class="exp-number mono">EXP. 02</span>
-          <span class="stamp stamp--wip">開発中</span>
-        </div>
-        <h3 class="exp-title">コツコツ宝くじ<span style="color:var(--ink-faint); font-weight:400; font-size:0.85em;">(仮)</span></h3>
-        <p class="exp-catch">タップと放置で、コツコツ一攫千金。</p>
-        <p class="exp-desc">
-          タップと放置でお金を貯めて、そのお金でドリームジャンボ宝くじを購入。
-          当選確率はリアルの宝くじに準拠し、当たるほど強化が進む放置系クリッカー×宝くじシミュレーターです。
-        </p>
-        <div class="exp-footer">
-          <div class="exp-tags">
-            <span>PLATFORM: iOS(予定)</span>
-            <span>GENRE: 放置×宝くじ</span>
-          </div>
-          <span class="exp-cta exp-cta--disabled">近日公開予定</span>
-        </div>
-      </article>
+  <footer class="contact">
+    <div class="box">
+      <div>
+        <div class="mono label">UPDATES</div>
+        <p>開発の進捗はXで発信しています。</p>
+        <a href="https://x.com/kei6068" target="_blank" rel="noopener">@kei6068 →</a>
+      </div>
+      <div>
+        <div class="mono label">CONTACT</div>
+        <p>ご連絡はフォームからお願いします。</p>
+        <a href="https://forms.gle/ZHo4YKbnUXTjv4ar8" target="_blank" rel="noopener">お問い合わせフォーム →</a>
+      </div>
     </div>
-  </section>
-
-  <footer class="block">
-    <div class="foot-row">
-      <span>更新情報・開発の進捗は X で発信しています。</span>
-      <a class="x-link" href="https://x.com/kei6068" target="_blank" rel="noopener"
-        >@kei6068 →</a
-      >
-    </div>
-    <p class="foot-copy">FIELD NOTES — kei, individual developer</p>
+    <p class="mono copy">© 2026 kei.dev — individual app developer</p>
   </footer>
+
 </main>
 
 <script>
   (function () {
-    var cards = document.querySelectorAll("[data-reveal]");
-    if (
-      !("IntersectionObserver" in window) ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      cards.forEach(function (c) {
-        c.classList.add("is-visible");
-      });
+    var els = document.querySelectorAll("[data-reveal]");
+    if (!("IntersectionObserver" in window) ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      els.forEach(function (e) { e.classList.add("is-visible"); });
       return;
     }
-    var io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    cards.forEach(function (c) {
-      io.observe(c);
-    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (e) { io.observe(e); });
   })();
 </script>
 
