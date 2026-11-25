@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="kei — Unityでスマホゲーム・アプリを個人開発しています。放置RPG、日本史クイズ、脳トレ、運試し。スキマ時間に、ちょうどいい遊びを。">
+<meta name="description" content="kei — Unityでスマホゲーム・アプリを個人開発しています。ドリフトレース、放置RPG、日本史クイズ、脳トレ、運試し。スキマ時間に、ちょうどいい遊びを。">
 <meta property="og:title" content="kei.dev — 個人ゲーム・アプリ開発">
-<meta property="og:description" content="スキマ時間に、ちょうどいい遊びを。ある勇者の探索日記 / 日本史年号クイズ / いろもじチグハグ / 連チャン！チャレンジ をApp Storeで配信中。">
+<meta property="og:description" content="スキマ時間に、ちょうどいい遊びを。日本最速決定戦 / ある勇者の探索日記 / 日本史年号クイズ / いろもじチグハグ / 連チャン！チャレンジ をApp Storeで配信中。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kei6068.github.io/">
 <meta name="twitter:card" content="summary">
@@ -61,6 +61,7 @@
   .app.iromoji { --c: var(--c1); background: linear-gradient(135deg, #2a1620, #12131b 60%); }
   .app.renchan { --c: var(--c2); background: linear-gradient(135deg, #142453, #0f1428 60%); }
   .app.yusha   { --c: var(--c3); background: linear-gradient(135deg, #0e3530, #0c1414 60%); }
+  .app.drift   { --c: #f2b84b; background: linear-gradient(135deg, #3a2a12, #0f1210 60%); }
   .app.nihonshi { --c: #f0c75e; background: linear-gradient(135deg, #1f3a5f, #10141e 60%); }
   .app .info { min-width: 0; }
   .app .head { display: flex; gap: 16px; align-items: center; margin-bottom: 22px; }
@@ -68,7 +69,7 @@
   .app .tag { font-size: 11px; letter-spacing: .14em; color: var(--c); border: 1px solid var(--c); border-radius: 99px; padding: 4px 10px; }
   .app h3 { font-size: clamp(24px, 3vw, 36px); margin: 8px 0 0; letter-spacing: -.01em; line-height: 1.25; }
   .app .catch { font-size: 18px; font-weight: 700; color: var(--c); margin: 0 0 12px; }
-  .app .desc { color: var(--body); line-height: 1.9; font-size: 15px; margin: 0 0 28px; }
+  .app .desc { color: var(--body); line-height: 1.9; font-size: 15px; margin: 0 0 28px; word-break: auto-phrase; }
   .store { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #000; font-weight: 700; padding: 14px 22px; border-radius: 14px; font-size: 14px; transition: transform .2s; }
   .store:hover { transform: translateY(-2px); }
 
@@ -120,9 +121,9 @@
 <header class="hero"><div class="wrap">
   <div class="eyebrow en">Indie Game &amp; App Developer</div>
   <h1>スキマ時間に、<br><span class="grad">ちょうどいい遊びを。</span></h1>
-  <p class="lede">Unityでスマホゲーム・アプリを個人開発しています。放置RPG、日本史クイズ、脳トレ、運試し ── 数分で遊べて、気づけばまた開いてしまう。そんな作品をつくっています。</p>
+  <p class="lede">Unityでスマホゲーム・アプリを個人開発しています。ドリフトレース、放置RPG、日本史クイズ、脳トレ、運試し ── 数分で遊べて、気づけばまた開いてしまう。そんな作品をつくっています。</p>
   <div class="stats en">
-    <div><strong>4</strong><span>APPS RELEASED</span></div>
+    <div><strong>5</strong><span>APPS RELEASED</span></div>
     <div><strong>iOS</strong><span>PLATFORM</span></div>
     <div><strong>Unity</strong><span>ENGINE</span></div>
   </div>
@@ -130,6 +131,23 @@
 
 <main class="wrap" id="apps">
   <div class="section-h"><h2 class="en">Apps</h2><p>App Storeで配信中</p></div>
+
+  <article class="app drift" data-reveal>
+    <div class="info">
+      <div class="head"><img class="icon" src="img/drift-icon.jpg" alt="日本最速決定戦のアイコン"><div><span class="tag">ドリフトレース</span><h3>日本最速決定戦</h3></div></div>
+      <p class="catch">実在の峠を、指一本でドリフト。</p>
+      <p class="desc">画面の左右を押すだけで曲がり、曲げ続けるとドリフト。榛名山・<span style="white-space:nowrap">いろは坂</span>・碓氷峠など、実在する峠道を再現した全11コースでタイムを削り、Game Centerのランキングで日本最速を目指そう。</p>
+      <a class="store" href="https://apps.apple.com/jp/app/%E6%97%A5%E6%9C%AC%E6%9C%80%E9%80%9F%E6%B1%BA%E5%AE%9A%E6%88%A6/id6835071970" target="_blank" rel="noopener"> App Storeでダウンロード</a>
+    </div>
+    <div class="rail">
+      <img src="img/drift-ss0.jpg" alt="ゲーム画面1" loading="lazy">
+      <img src="img/drift-ss1.jpg" alt="ゲーム画面2" loading="lazy">
+      <img src="img/drift-ss2.jpg" alt="ゲーム画面3" loading="lazy">
+      <img src="img/drift-ss3.jpg" alt="ゲーム画面4" loading="lazy">
+      <img src="img/drift-ss4.jpg" alt="ゲーム画面5" loading="lazy">
+      <img src="img/drift-ss5.jpg" alt="ゲーム画面6" loading="lazy">
+    </div>
+  </article>
 
   <article class="app yusha" data-reveal>
     <div class="info">
